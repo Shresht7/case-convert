@@ -1,5 +1,5 @@
 /** Case of a string */
-enum Case {
+export enum Case {
     //  camelCase
     Camel = 'CAMEL',
     //  snake_case
