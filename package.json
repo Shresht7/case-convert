@@ -1,0 +1,16 @@
+{
+  "name": "case-convert",
+  "version": "1.0.0",
+  "description": "A small utility library to convert string case",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "test",
+    "build": "tsc"
+  },
+  "author": "Shresht7",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^4.7.4"
+  }
+}
