@@ -12,12 +12,20 @@ enum Case {
     Pascal = 'TITLE',
 }
 
-//  TODO: Add Regular Expressions for the various cases
+/**
+ * Helper function to generate regular expressions for a given string case
+ * @param first RegExp to match the first character of the string
+ * @param subsequent RegExp to match the starting character of any subsequent words
+ * @param separator RegExp to match the delimiter between words
+ */
+const createRegex = (first: string, subsequent: string, separator: string = ""): RegExp => new RegExp(`${first}[a-z0-9]+(?:${separator}${subsequent}[a-z0-9]+)*`)
+
+/** Maps string cases to their corresponding regular expressions */
 const CaseRegexp: Record<Case, RegExp> = {
-    CAMEL: /\w/,
-    SNAKE: /\w/,
-    KEBAB: /\w/,
-    TITLE: /\w/,
+    CAMEL: createRegex('[a-z]', '[A-Z]'),
+    SNAKE: createRegex('[a-z]', '[a-z]', '[_]'),
+    KEBAB: createRegex('[a-z]', '[a-z]', '[-]'),
+    TITLE: createRegex('[A-Z]', '[A-Z]'),
 }
 
 /**
