@@ -8,7 +8,7 @@
  * @returns an array of words
  */
 export const splitIntoWords = (str: string): string[] => str
-    .replace(/([A-Z])/g, "_$1")
+    .replace(/([A-Z])[^A-Z]*?/g, "_$1")
     .split(/[_\-]/g)
     .filter(x => x !== '')
 
