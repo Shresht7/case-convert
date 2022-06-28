@@ -21,6 +21,11 @@ describe('capitalize', () => {
             actual: capitalize('Capital'),
             expected: 'Capital'
         },
+        {
+            desc: 'should capitalize everything if all is true',
+            actual: capitalize('Capital', true),
+            expected: 'CAPITAL'
+        },
     ])
 
 })
@@ -40,7 +45,12 @@ describe('uncapitalize', () => {
         },
         {
             desc: 'should not mess with a non-capitalized string',
-            actual: uncapitalize('capital'),
+            actual: uncapitalize('Capital'),
+            expected: 'capital'
+        },
+        {
+            desc: 'should uncapitalize everything if all is true',
+            actual: uncapitalize('CAPITAL', true),
             expected: 'capital'
         },
     ])

@@ -13,6 +13,6 @@ export const splitIntoWords = (str: string): string[] => str
     .filter(x => x !== '')
 
 /** Capitalize the first character of the string */
-export const capitalize = (str: string) => str[0].toUpperCase() + str.substring(1)
+export const capitalize = (str: string, all: boolean = false) => all ? str.toUpperCase() : str[0].toUpperCase() + str.substring(1)
 /** Uncapitalize the first character of the string */
-export const uncapitalize = (str: string) => str[0].toLowerCase() + str.substring(1)
+export const uncapitalize = (str: string, all: boolean = false) => all ? str.toLowerCase() : str[0].toLowerCase() + str.substring(1)
