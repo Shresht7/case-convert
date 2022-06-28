@@ -18,7 +18,7 @@ export enum Case {
  * @param subsequent RegExp to match the starting character of any subsequent words
  * @param separator RegExp to match the delimiter between words
  */
-const createRegex = (first: string, subsequent: string, separator: string = ""): RegExp => new RegExp(`${first}[a-z0-9]+(?:${separator}${subsequent}[a-z0-9]+)*`)
+const createRegex = (first: string, subsequent: string, separator: string = ""): RegExp => new RegExp(`^${first}[a-z0-9]+(?:${separator}${subsequent}[a-z0-9]+)*$`)
 
 /** Maps string cases to their corresponding regular expressions */
 const CaseRegexp: Record<Case, RegExp> = {
