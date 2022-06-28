@@ -1,5 +1,11 @@
 import { describe, expect, test } from 'vitest'
-import { check, Case, determineCase } from './main'
+import {
+    check,
+    Case,
+    determineCase,
+    splitIntoWords,
+    convert,
+} from './main'
 
 interface TestCase<T> {
     desc: string
@@ -10,7 +16,7 @@ interface TestCase<T> {
 function RunTestCases<T>(testCases: TestCase<T>[]) {
     for (const testCase of testCases as TestCase<T>[]) {
         test(testCase.desc, () => {
-            expect(testCase.actual).toBe(testCase.expected)
+            expect(testCase.actual).toStrictEqual(testCase.expected)
         })
     }
 }
@@ -81,5 +87,73 @@ describe('determineCase', () => {
     ]
 
     RunTestCases(testCases)
+
+})
+
+
+describe('splitIntoWords', () => {
+
+    const testCases: TestCase<string[]>[] = [
+        {
+            desc: 'should split camelCase',
+            actual: splitIntoWords('camelCaseString'),
+            expected: ['camel', 'Case', 'String']
+        },
+        {
+            desc: 'should split TitleCase',
+            actual: splitIntoWords('TitleCaseString'),
+            expected: ['Title', 'Case', 'String']
+        },
+        {
+            desc: 'should split snake_case',
+            actual: splitIntoWords('snake_case_string'),
+            expected: ['snake', 'case', 'string']
+        },
+        {
+            desc: 'should split kebab-case',
+            actual: splitIntoWords('kebab-case-string'),
+            expected: ['kebab', 'case', 'string']
+        },
+    ]
+
+    RunTestCases(testCases)
+
+})
+
+type convertTestCase = [string, Case, string]
+
+function RunConvertTest(tests: convertTestCase[]) {
+    const testCases: TestCase<string>[] = []
+
+    for (const [input, to, output] of tests) {
+        testCases.push({
+            desc: `should convert ${input} to ${output} when case is ${to}`,
+            actual: convert(input, to),
+            expected: output,
+        })
+    }
+
+    RunTestCases(testCases)
+}
+
+describe('convert', () => {
+
+    RunConvertTest([
+        ['camelCase', Case.Title, 'CamelCase'],
+        ['camelCase', Case.Snake, 'camel_case'],
+        ['camelCase', Case.Kebab, 'camel-case'],
+
+        ['TitleCase', Case.Camel, 'titleCase'],
+        ['TitleCase', Case.Snake, 'title_case'],
+        ['TitleCase', Case.Kebab, 'title-case'],
+
+        ['snake_case', Case.Camel, 'snakeCase'],
+        ['snake_case', Case.Title, 'SnakeCase'],
+        ['snake_case', Case.Kebab, 'snake-case'],
+
+        ['kebab-case', Case.Camel, 'kebabCase'],
+        ['kebab-case', Case.Title, 'KebabCase'],
+        ['kebab-case', Case.Snake, 'kebab_case'],
+    ])
 
 })

@@ -52,11 +52,55 @@ export function determineCase(str: string): Case | undefined {
 }
 
 /**
+ * Split a string into an array of words. Removes special characters like _ and -
+ * @param str String to split into words
+ * @returns an array of words
+ */
+export const splitIntoWords = (str: string): string[] => str
+    .replace(/([A-Z])/g, "_$1")
+    .split(/[_\-]/g)
+    .filter(x => x !== '')
+
+/** Capitalize the first character of the string */
+export const capitalize = (str: string) => str[0].toUpperCase() + str.substring(1)
+/** Uncapitalize the first character of the string */
+export const uncapitalize = (str: string) => str[0].toLowerCase() + str.substring(1)
+
+/** Convert a string to camelCase */
+export const toCamelCase = (str: string) => {
+    const [firstWord, ...words] = splitIntoWords(str)
+    return words.reduce((accumulator, current) => accumulator + capitalize(current), uncapitalize(firstWord))
+}
+
+/** Convert a string to snake-case */
+const toSnakeCase = (str: string) => {
+    const [firstWord, ...words] = splitIntoWords(str)
+    return words.reduce((accumulator, current) => accumulator + '_' + uncapitalize(current), uncapitalize(firstWord))
+}
+
+/** Convert a string to kebab-case */
+const toKebabCase = (str: string) => {
+    const [firstWord, ...words] = splitIntoWords(str)
+    return words.reduce((accumulator, current) => accumulator + '-' + uncapitalize(current), uncapitalize(firstWord))
+}
+
+/** Convert a string to TitleCase */
+const toTitleCase = (str: string) => {
+    const [firstWord, ...words] = splitIntoWords(str)
+    return words.reduce((accumulator, current) => accumulator + capitalize(current), capitalize(firstWord))
+}
+
+const CaseConverts = {
+    CAMEL: toCamelCase,
+    SNAKE: toSnakeCase,
+    KEBAB: toKebabCase,
+    TITLE: toTitleCase,
+}
+
+/**
  * Convert a string to a different case
  * @param str String to convert the case of
  * @param strCase Case to convert to
  * @returns Converted string
  */
-export function convert(str: string, strCase: Case): string {
-    return str
-}
+export const convert = (str: string, strCase: Case): string => CaseConverts[strCase](str)
