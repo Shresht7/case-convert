@@ -6,7 +6,8 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "build": "tsc"
+    "build": "tsc",
+    "dev": "tsc -w"
   },
   "author": "Shresht7",
   "license": "MIT",
