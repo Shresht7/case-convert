@@ -9,19 +9,19 @@ export const toCamelCase = (str: string) => {
 }
 
 /** Convert a string to snake-case */
-const toSnakeCase = (str: string) => {
+export const toSnakeCase = (str: string) => {
     const [firstWord, ...words] = splitIntoWords(str)
     return words.reduce((accumulator, current) => accumulator + '_' + uncapitalize(current), uncapitalize(firstWord))
 }
 
 /** Convert a string to kebab-case */
-const toKebabCase = (str: string) => {
+export const toKebabCase = (str: string) => {
     const [firstWord, ...words] = splitIntoWords(str)
     return words.reduce((accumulator, current) => accumulator + '-' + uncapitalize(current), uncapitalize(firstWord))
 }
 
 /** Convert a string to TitleCase */
-const toTitleCase = (str: string) => {
+export const toTitleCase = (str: string) => {
     const [firstWord, ...words] = splitIntoWords(str)
     return words.reduce((accumulator, current) => accumulator + capitalize(current), capitalize(firstWord))
 }
