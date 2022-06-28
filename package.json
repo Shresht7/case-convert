@@ -5,12 +5,13 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "test",
+    "test": "vitest",
     "build": "tsc"
   },
   "author": "Shresht7",
   "license": "MIT",
   "devDependencies": {
-    "typescript": "^4.7.4"
+    "typescript": "^4.7.4",
+    "vitest": "^0.16.0"
   }
 }
