@@ -3,7 +3,8 @@ import { describe } from 'vitest'
 import { check, determineCase, Case } from './case'
 import { TestCase, RunTestCases } from './test'
 
-function RunCheckTest(str: string, strCase: Case) {
+/** Run multiple tests that check if the given string (only) matches the given strCase */
+function RunChecks(str: string, strCase: Case) {
     const testCases: TestCase<boolean>[] = []
 
     for (const c of Object.values(Case)) {
@@ -21,44 +22,64 @@ function RunCheckTest(str: string, strCase: Case) {
 describe('check', () => {
 
     describe('camelCase', () => {
-        RunCheckTest('camelCase', Case.Camel)
+        RunChecks('camelCase', Case.Camel)
     })
 
     describe('TitleCase', () => {
-        RunCheckTest('TitleCase', Case.Title)
+        RunChecks('TitleCase', Case.Title)
     })
 
     describe('snake_case', () => {
-        RunCheckTest('snake_case', Case.Snake)
+        RunChecks('snake_case', Case.Snake)
     })
 
     describe('kebab-case', () => {
-        RunCheckTest('kebab-case', Case.Kebab)
+        RunChecks('kebab-case', Case.Kebab)
     })
 
 })
 
 describe('determineCase', () => {
 
-    const testCases: TestCase<Case | undefined>[] = [
+    RunTestCases([
         {
             desc: 'should determine "testString" to be camelCase',
-            actual: determineCase('camelCase'),
+            actual: determineCase('testString'),
+            expected: Case.Camel
+        },
+        {
+            desc: 'should determine "secondTestString" to be camelCase',
+            actual: determineCase('secondTestString'),
             expected: Case.Camel
         },
         {
             desc: 'should determine "TestString" to be TitleCase',
-            actual: determineCase('TitleCase'),
+            actual: determineCase('TestString'),
+            expected: Case.Title
+        },
+        {
+            desc: 'should determine "SecondTestString" to be TitleCase',
+            actual: determineCase('SecondTestString'),
             expected: Case.Title
         },
         {
             desc: 'should determine "test_string" to be snake_case',
-            actual: determineCase('snake_case'),
+            actual: determineCase('test_string'),
+            expected: Case.Snake
+        },
+        {
+            desc: 'should determine "second_test_string" to be snake_case',
+            actual: determineCase('second_test_string'),
             expected: Case.Snake
         },
         {
             desc: 'should determine "test-string" to be kebab-case',
-            actual: determineCase('kebab-case'),
+            actual: determineCase('test-string'),
+            expected: Case.Kebab
+        },
+        {
+            desc: 'should determine "second-test-string" to be kebab-case',
+            actual: determineCase('second-test-string'),
             expected: Case.Kebab
         },
         {
@@ -66,8 +87,16 @@ describe('determineCase', () => {
             actual: determineCase('0123Abc'),
             expected: undefined
         },
-    ]
-
-    RunTestCases(testCases)
+        {
+            desc: 'should return undefined for mixed cases',
+            actual: determineCase('test-String'),
+            expected: undefined
+        },
+        {
+            desc: 'should return undefined for mixed cases',
+            actual: determineCase('Second_test_String'),
+            expected: undefined
+        },
+    ])
 
 })
