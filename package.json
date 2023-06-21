@@ -2,7 +2,7 @@
   "name": "case-convert",
   "version": "1.0.0",
   "description": "A small utility library to convert string case",
-  "main": "index.js",
+  "main": "src/index.ts",
   "type": "module",
   "scripts": {
     "test": "vitest",
