@@ -1,8 +1,6 @@
-# case-convert
+# `case-convert`
 
 Utility functions to determine and convert the case of strings.
-
-<h2>🚧 Work-in-Progress 🚧</h2>
 
 ## Usage
 
@@ -84,4 +82,4 @@ toTitleCase("some_string")  //  SomeString
 
 ## 📑 License
 
-[MIT License](./LICENSE)
+This project is licensed under the [MIT License](./LICENSE).
