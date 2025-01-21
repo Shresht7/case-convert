@@ -13,6 +13,6 @@
   "license": "MIT",
   "devDependencies": {
     "typescript": "^4.7.4",
-    "vitest": "^0.16.0"
+    "vitest": "^3.0.3"
   }
 }
